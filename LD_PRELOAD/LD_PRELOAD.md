@@ -1,6 +1,7 @@
 # 利用LD_PRELOAD机制进行动态注入
 LD_PRELOAD是linux下的一个环境变量，动态链接器在载入一个程序所需的所有动态库之前，首先会载入LD_PRELOAD环境变量所指定的动态库。运用这个机制，可以修改已有动态库中的方法，加入我们需要的逻辑，改编程序的执行行为。此方法只对动态链接的程序有效，静态链接程序无效。
-测试程序如下
+
+测试程序如下:
 ```
 #include <stdio.h>
 #include <string.h>
@@ -38,7 +39,7 @@ int strcmp(const char *s1, const char *s2) {
   return 0;
 }
 ```
-编译方式如下：
+编译：
 ```
 gcc -fPIC -c strcmp-hijack.c -o strcmp-hijack.o
 gcc -shared -o strcmp-hijack.so strcmp-hijack.o
@@ -48,7 +49,7 @@ gcc -shared -o strcmp-hijack.so strcmp-hijack.o
 ./test redbull
 Red light
 ```
-若果在之前我们自己实现的动态链接库，结果如下：
+如果在之前加入我们自己实现的动态链接库，结果如下：
 ```
 LD_PRELOAD="./strcmp-hijack.so" ./test redbull
 s1 eq foobar
@@ -56,14 +57,5 @@ s2 eq redbull
 Green light!
 ```
 可以看到，现在程序跳到了passwd正确的逻辑。
-
-
-
-
-
-
-
-
-
 
 参考文献：https://www.exploit-db.com/papers/13233/
