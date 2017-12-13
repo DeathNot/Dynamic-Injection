@@ -47,7 +47,7 @@ gcc -shared -o strcmp-hijack.so strcmp-hijack.o
 现在我们如果简单执行./test，结果如下：
 ```
 ./test redbull
-Red light
+Red light!
 ```
 如果在之前加入我们自己实现的动态链接库，结果如下：
 ```

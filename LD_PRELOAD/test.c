@@ -14,6 +14,6 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  printf("Red light\n");
+  printf("Red light!\n");
   return 0;
 }
